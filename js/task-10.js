@@ -18,15 +18,19 @@ createBtnElem.addEventListener('click', event => {
 });
 
 function createBoxes(amount) {
+  let boxSize = 30;
+  const currentBoxesNumber = boxesElem.querySelectorAll('div').length;
+  if (currentBoxesNumber > 0) {
+    boxSize = Number.parseInt(boxesElem.lastChild.style.width);
+  }
   let html = '';
-  for (let i = 0; i < amount; i += 1) {
+  for (let i = 0; i < amount - currentBoxesNumber; i += 1) {
     const color = getRandomHexColor();
-    html += `<div style="width: ${i * 10 + 30}px; height: ${
-      i * 10 + 30
+    html += `<div style="width: ${i * 10 + 10 + boxSize}px; height: ${
+      i * 10 + 10 + boxSize
     }px; background-color: ${color}"></div>`;
   }
-  console.log(html);
-  boxesElem.insertAdjacentHTML('afterbegin', html);
+  boxesElem.insertAdjacentHTML('beforeend', html);
 }
 
 destroyBtnElem.addEventListener('click', event => {
